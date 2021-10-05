@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://html2canvas.hertzen.com/dist/html2canvas.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Report Module</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <div class="navbar-brand ml-5" href="#">
+          <img
+            src="./assets/AAC_logo.png"
+            width="150"
+            height="30"
+            class="ml-5 d-inline-block align-top"
+            alt=""
+          />
+          Reporting Module
+        </div>
+
+        <div class="nav pull-right">
+          <button
+            type="button"
+            class="btn btn-primary navbar-btn"
+            id="print_pdf"
+          >
+            <i class="fas fa-file-pdf"></i>
+            Print PDF
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <ul class="mt-4 nav nav-tabs nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Types</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Of</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Reports</a>
+        </li>
+      </ul>
+
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card" style="width: 18rem">
+            <div class="card-body">
+              <h5 class="card-title">SOA Report</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{sub_header}}</h6>
+              <p class="card-text">{{Description}}</p>
+              <a href="./_SOAReport.html" class="card-link">View Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
