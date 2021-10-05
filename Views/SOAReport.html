@@ -30,10 +30,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
-    rel="stylesheet"
-    href="../styles/reports.css"
-  />
+    <link rel="stylesheet" href="../styles/reports.css" />
     <script src="../js/reports.js"></script>
     <title>SOA Report</title>
   </head>
@@ -50,7 +47,7 @@
           />
           Reporting Module
         </div>
-        
+
         <div class="nav pull-right">
           <button
             type="button"
@@ -59,6 +56,14 @@
           >
             <i class="fas fa-file-pdf"></i>
             Print PDF
+          </button>
+          <button style="margin-left:2rem;"
+            type="button"
+            class="btn btn-success navbar-btn"
+            id="export_csv"
+          >
+            <i class="fas fa-file-csv"></i>
+            Export to CSV
           </button>
         </div>
       </div>
@@ -521,10 +526,12 @@
     $("#SOA2 tbody").html(tableBody2HTML);
     $("#SOA3 tbody").html(tableBody3HTML);
 
-    
-
-    $("#print_pdf").on("click",function(){
+    $("#print_pdf").on("click", function () {
       CreatePDFfromHTML(testHeaders.report_title);
     });
+    $("#export_csv").on("click", function () {
+      exportToExcel(testHeaders.report_title);
+    });
+    
   });
 </script>
