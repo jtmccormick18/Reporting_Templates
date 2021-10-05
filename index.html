@@ -30,10 +30,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
-      rel="stylesheet"
-      href="./styles/reports.css"
-    />
+    <link rel="stylesheet" href="./styles/reports.css" />
     <title>Report Module</title>
   </head>
   <body>
@@ -50,19 +47,58 @@
           Reporting Module
         </div>
 
-        <div class="nav pull-right">
-          <button
-            type="button"
-            class="btn btn-primary navbar-btn"
-            id="print_pdf"
-          >
-            <i class="fas fa-file-pdf"></i>
-            Print PDF
-          </button>
-        </div>
       </div>
     </nav>
     <div class="container">
+      <div class="row">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+          <h1 class="text-center">Report Criteria</h1>
+          <form>
+            <div class="mb-3">
+              <div id="tax_key_range" class="form-label">Tax Key Range</div>
+              <div class="input-group" id="tax_key_range">
+                <input
+                  type="text"
+                  aria-label="First Parcel"
+                  class="form-control"
+                  id="parcel_range_first"
+                />
+                <span class="input-group-text">THRU</span>
+                <input
+                  type="text"
+                  aria-label="Last Parcel"
+                  class="form-control"
+                  id="parcel_range_last"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <select
+                class="form-select"
+                aria-label="County Select"
+                id="county_select"
+              >
+                <option selected>County</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <!-- <div class="mb-3 form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="exampleCheck1"
+            />
+            <label class="form-check-label" for="exampleCheck1"
+              >Check me out</label
+            >
+          </div> -->
+            <button type="submit" class="btn btn-primary" disabled>Submit</button>
+          </form>
+        </div>
+      </div>
       <ul class="mt-4 nav nav-tabs nav-fill">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Types</a>
