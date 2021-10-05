@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://html2canvas.hertzen.com/dist/html2canvas.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>SOA Report</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <div class="navbar-brand ml-5" href="#">
+          <img
+            src="./assets/AAC_logo.png"
+            width="150"
+            height="30"
+            class="ml-5 d-inline-block align-top"
+            alt=""
+          />
+          Reporting Module
+        </div>
+        <!-- <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#"
+              >
+            </a>
+          </div>
+        </div> -->
+        <div class="nav pull-right">
+          <button
+            type="button"
+            class="btn btn-primary navbar-btn"
+            id="print_pdf"
+          >
+            <i class="fas fa-file-pdf"></i>
+            Print PDF
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="container html-content">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h1 id="report_county">{{report_county}} , {{report_muni}}</h1>
+        </div>
+        <div class="col-sm-12 text-center">
+          <h3 id="report_title"><strong>{{report_title}}</strong></h3>
+          <h5 id="report_sub_heading">{{report_sub_heading}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table" id="SOA1">
+            <thead class="thead-dark">
+              <tr id="main" class="align-middle text-center"></tr>
+              <tr id="sub" class="align-middle text-center"></tr>
+            </thead>
+            <tbody id="SOA1content"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-10">
+          <table class="table" id="SOA2">
+            <thead class="thead-dark">
+              <tr id="main2" class="align-middle text-center"></tr>
+              <tr id="sub2" class="align-middle text-center"></tr>
+            </thead>
+            <tbody id="SOA2content"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <table class="table" id="SOA3">
+            <thead class="thead-dark">
+              <tr id="main3" class="align-middle text-center"></tr>
+              <tr id="sub3" class="align-middle text-center"></tr>
+            </thead>
+            <tbody id="SOA3content"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <p class="small text-left">
+          * Total parcel count may not equal the sum of the classes because a
+          single tax key number can have land or improvements in more than one
+          class.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const table1Data = {
+    headers: [
+      {
+        title: "Taxabale Real Estate",
+        data_column: "TBD",
+      },
+      {
+        title: "Class Code",
+        data_column: "TBD",
+      },
+      {
+        title: "Parcel Counts",
+        data_column: "TBD",
+        sub_columns: [
+          {
+            title: "Land",
+            data_column: "TBD",
+          },
+          {
+            title: "Impts",
+            data_column: "TBD",
+          },
+        ],
+      },
+      {
+        title: "Acres",
+        data_column: "TBD",
+      },
+      {
+        title: "Assessed Value",
+        data_column: "TBD",
+        sub_columns: [
+          {
+            title: "Land",
+            data_column: "TBD",
+          },
+          {
+            title: "Improvements",
+            data_column: "TBD",
+          },
+          {
+            title: "Total",
+            data_column: "TBD",
+          },
+        ],
+      },
+    ],
+  };
+
+  const table2Data = {
+    headers: [
+      {
+        title: "Land in Forest Programs",
+        data_column: "TBD",
+      },
+      {
+        title: "Class Code",
+        data_column: "TBD",
+      },
+      {
+        title: "Parcel Counts",
+        data_column: "TBD",
+        sub_columns: [
+          {
+            title: "Land",
+            data_column: "TBD",
+          },
+          {
+            title: "Impts",
+            data_column: "TBD",
+          },
+        ],
+      },
+      {
+        title: "Acres",
+        data_column: "TBD",
+      },
+      {
+        title: "Assessed Value of Land",
+        data_column: "TBD",
+      },
+    ],
+  };
+
+  const table3Data = {
+    headers: [
+      {
+        title: "Exempt Real Estate",
+        data_column: "TBD",
+      },
+      {
+        title: "Class Code",
+        data_column: "TBD",
+      },
+      {
+        title: "Parcel Counts",
+        data_column: "TBD",
+        sub_columns: [
+          {
+            title: "Land",
+            data_column: "TBD",
+          },
+          {
+            title: "Impts",
+            data_column: "TBD",
+          },
+        ],
+      },
+      {
+        title: "Acres",
+        data_column: "TBD",
+      },
+    ],
+  };
+  $(document).ready(function () {
+    $(".table").addClass("table-sm table-bordered");
+
+    $(".table thead").addClass("table-dark");
+
+    const generateTableHTML = function (header_array) {
+      let sub_category_html = "";
+      const headers = header_array.map((column) => {
+        if (!column["sub_columns"] || column["sub_columns"].length < 1) {
+          return `<th scope="col" rowspan="2" data-attr="${column.data_column}">${column.title}</th>`;
+        } else {
+          column["sub_columns"].forEach(
+            (sub) =>
+              (sub_category_html += `<th scope="col" data-attr="${sub.data_column}"> ${sub.title}</th>`)
+          );
+          return `<th scope="col" colspan="${column["sub_columns"].length}">${column.title}</th>`;
+        }
+      });
+      return {
+        main: headers,
+        sub: sub_category_html,
+      };
+    };
+
+    const SOA_Main_Table_Category_HTML = generateTableHTML(table1Data.headers);
+    $("#SOA1 #main").html(SOA_Main_Table_Category_HTML.main);
+    $("#SOA1 #sub").html(SOA_Main_Table_Category_HTML.sub);
+
+    const SOA_Main_Table2_Category_HTML = generateTableHTML(table2Data.headers);
+
+    $("#SOA2 #main2").html(SOA_Main_Table2_Category_HTML.main);
+    $("#SOA2 #sub2").html(SOA_Main_Table2_Category_HTML.sub);
+
+    const SOA_Main_Table3_Category_HTML = generateTableHTML(table3Data.headers);
+
+    $("#SOA3 #main3").html(SOA_Main_Table3_Category_HTML.main);
+    $("#SOA3 #sub3").html(SOA_Main_Table3_Category_HTML.sub);
+
+    const testHeaders = {
+      report_county: "Dane County",
+      report_muni: "Town of WestPort",
+      report_title: "2019 Assessment Roll Totals",
+      report_sub_heading: "Manufacturing Value Suppressed",
+    };
+
+    for (let [key, val] of Object.entries(testHeaders)) {
+      $(`#${key}`).text(val);
+    }
+    const testData1 = [
+      {
+        "Taxable Real Estate": "Residential",
+        "Class Code": "1",
+        Acres: "1,927 ",
+        Land: "1,724 ",
+        Impts: "1,423.327 ",
+        Land2: "$337,759,800 ",
+        Improvements: "$503,332,400 ",
+        Total: "$841,092,200 ",
+      },
+      {
+        "Taxable Real Estate": "Commercial",
+        "Class Code": "2",
+        Acres: "122 ",
+        Land: "94 ",
+        Impts: "617.228 ",
+        Land2: "$23,078,500 ",
+        Improvements: "$39,903,200 ",
+        Total: "$62,981,700 ",
+      },
+      {
+        "Taxable Real Estate": "Manufacturing",
+        "Class Code": "3",
+        Acres: "9 ",
+        Land: "0 ",
+        Impts: "172.677 ",
+        Land2: "$0 ",
+        Improvements: "$0 ",
+        Total: "$0 ",
+      },
+      {
+        "Taxable Real Estate": "Agricultural",
+        "Class Code": "4",
+        Acres: "365 ",
+        Land: "",
+        Impts: "6,276.149 ",
+        Land2: "$1,829,700 ",
+        Improvements: "",
+        Total: "$1,829,700 ",
+      },
+      {
+        "Taxable Real Estate": "Undeveloped",
+        "Class Code": "5",
+        Acres: "201 ",
+        Land: "",
+        Impts: "945.007 ",
+        Land2: "$883,000 ",
+        Improvements: "",
+        Total: "$883,000 ",
+      },
+      {
+        "Taxable Real Estate": "Agricultural use forest",
+        "Class Code": "5m",
+        Acres: "46 ",
+        Land: "",
+        Impts: "151.636 ",
+        Land2: "$729,800 ",
+        Improvements: "",
+        Total: "$729,800 ",
+      },
+      {
+        "Taxable Real Estate": "Productive forest",
+        "Class Code": "6",
+        Acres: "11 ",
+        Land: "",
+        Impts: "54.944 ",
+        Land2: "$490,200 ",
+        Improvements: "",
+        Total: "$490,200 ",
+      },
+      {
+        "Taxable Real Estate": "Agricultural homesite",
+        "Class Code": "7",
+        Acres: "49 ",
+        Land: "0 ",
+        Impts: "144.154 ",
+        Land2: "$5,985,000 ",
+        Improvements: "$8,747,900 ",
+        Total: "$14,732,900 ",
+      },
+      {
+        "Taxable Real Estate": "Total taxable real estate",
+        "Class Code": "",
+        Acres: "2393*",
+        Land: "1866*",
+        Impts: "9,785.122 ",
+        Land2: "$370,756,000 ",
+        Improvements: "$551,983,500 ",
+        Total: "$922,739,500 ",
+      },
+    ];
+
+    const testData2 = [
+      {
+        "Land in Forest Programs": "Private forest crop post 1971",
+        "Class Code": "W1",
+        Land: "",
+        Impts: "",
+        Acres: null,
+        "Assessed Value of Land": null,
+      },
+      {
+        "Land in Forest Programs": "Private forest crop pre 1972",
+        "Class Code": "W2",
+        Land: "",
+        Impts: "",
+        Acres: null,
+        "Assessed Value of Land": null,
+      },
+      {
+        "Land in Forest Programs": "Forest crop special",
+        "Class Code": "W3",
+        Land: "",
+        Impts: "",
+        Acres: null,
+        "Assessed Value of Land": null,
+      },
+      {
+        "Land in Forest Programs": "County forest crop",
+        "Class Code": "W4",
+        Land: "",
+        Impts: "",
+        Acres: null,
+        "Assessed Value of Land": null,
+      },
+      {
+        "Land in Forest Programs": "Managed forest law open post 2004",
+        "Class Code": "W5",
+        Land: "",
+        Impts: "",
+        Acres: null,
+        "Assessed Value of Land": null,
+      },
+      {
+        "Land in Forest Programs": "Managed forest law closed post 2004",
+        "Class Code": "W6",
+        Land: "1",
+        Impts: "",
+        Acres: 12,
+        "Assessed Value of Land": 108000,
+      },
+      {
+        "Land in Forest Programs": "Managed forest law open pre 2005",
+        "Class Code": "W7",
+        Land: "",
+        Impts: "",
+        Acres: null,
+        "Assessed Value of Land": null,
+      },
+      {
+        "Land in Forest Programs": "Managed forest law closed pre 2005",
+        "Class Code": "W8",
+        Land: "1",
+        Impts: "",
+        Acres: 12,
+        "Assessed Value of Land": 108000,
+      },
+      {
+        "Land in Forest Programs": "Managed forest law closed ferrous mining",
+        "Class Code": "W9",
+        Land: "",
+        Impts: "",
+        Acres: null,
+        "Assessed Value of Land": null,
+      },
+      {
+        "Land in Forest Programs": "Total land in forest programs",
+        "Class Code": "",
+        Land: "2*",
+        Impts: "",
+        Acres: 24,
+        "Assessed Value of Land": 216000,
+      },
+    ];
+    const testData3 = [
+      {
+        "Exempt Real Estate": "Exempt federal",
+        "Class Code": "X1",
+        Land: "0",
+        Impts: "0",
+        Acres: 0,
+      },
+      {
+        "Exempt Real Estate": "Exempt state",
+        "Class Code": "X2",
+        Land: "64",
+        Impts: "0",
+        Acres: 1078.609,
+      },
+      {
+        "Exempt Real Estate": "Exempt county",
+        "Class Code": "X3",
+        Land: "52",
+        Impts: "5",
+        Acres: 1070.381,
+      },
+      {
+        "Exempt Real Estate": "Exempt local",
+        "Class Code": "X4",
+        Land: "88",
+        Impts: "2",
+        Acres: 565.254,
+      },
+      {
+        "Exempt Real Estate": "Exempt other",
+        "Class Code": "X4",
+        Land: "248",
+        Impts: "216",
+        Acres: 241.295,
+      },
+      {
+        "Exempt Real Estate": "Total exempt real estate",
+        "Class Code": "",
+        Land: "452*",
+        Impts: "223*",
+        Acres: 2955.539,
+      },
+    ];
+
+    const generateTableBodyHTML = function (data) {
+      return data.map((obj) => {
+        let values = Object.values(obj);
+        let html = values.map(
+          (value) =>
+            `<td class="${!value ? "table-secondary" : "table-light"}">${
+              !value ? "" : value
+            }</td>`
+        );
+        const row = `<tr>${html}</tr>`;
+        return row;
+      });
+    };
+    const tableBody1HTML = generateTableBodyHTML(testData1);
+    const tableBody2HTML = generateTableBodyHTML(testData2);
+    const tableBody3HTML = generateTableBodyHTML(testData3);
+
+    $("#SOA1 tbody").html(tableBody1HTML);
+    $("#SOA2 tbody").html(tableBody2HTML);
+    $("#SOA3 tbody").html(tableBody3HTML);
+
+    const CreatePDFfromHTML = function () {
+      var HTML_Width = $(".html-content").width();
+      var HTML_Height = $(".html-content").height();
+      var top_left_margin = 15;
+      var PDF_Width = HTML_Width + top_left_margin * 2;
+      var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
+      var canvas_image_width = HTML_Width;
+      var canvas_image_height = HTML_Height;
+
+      var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+      html2canvas($(".html-content")[0]).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF("p", "pt", [PDF_Width, PDF_Height]);
+        pdf.addImage(
+          imgData,
+          "JPG",
+          top_left_margin,
+          top_left_margin,
+          canvas_image_width,
+          canvas_image_height
+        );
+        for (var i = 1; i <= totalPDFPages; i++) {
+          pdf.addPage(PDF_Width, PDF_Height);
+          pdf.addImage(
+            imgData,
+            "JPG",
+            top_left_margin,
+            -(PDF_Height * i) + top_left_margin * 4,
+            canvas_image_width,
+            canvas_image_height
+          );
+        }
+        pdf.save(testHeaders.report_title);
+        $(".html-content").hide();
+      });
+    };
+
+    $("#print_pdf").on("click", CreatePDFfromHTML);
+  });
+</script>
