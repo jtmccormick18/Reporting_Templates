@@ -30,6 +30,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+    rel="stylesheet"
+    href="../styles/reports.css"
+  />
+    <script src="../js/reports.js"></script>
     <title>SOA Report</title>
   </head>
   <body>
@@ -45,24 +50,7 @@
           />
           Reporting Module
         </div>
-        <!-- <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#"
-              >
-            </a>
-          </div>
-        </div> -->
+        
         <div class="nav pull-right">
           <button
             type="button"
@@ -85,7 +73,7 @@
           <h5 id="report_sub_heading">{{report_sub_heading}}</h5>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-2">
         <div class="col-sm-12">
           <table class="table" id="SOA1">
             <thead class="thead-dark">
@@ -533,44 +521,10 @@
     $("#SOA2 tbody").html(tableBody2HTML);
     $("#SOA3 tbody").html(tableBody3HTML);
 
-    const CreatePDFfromHTML = function () {
-      var HTML_Width = $(".html-content").width();
-      var HTML_Height = $(".html-content").height();
-      var top_left_margin = 15;
-      var PDF_Width = HTML_Width + top_left_margin * 2;
-      var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
-      var canvas_image_width = HTML_Width;
-      var canvas_image_height = HTML_Height;
+    
 
-      var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-
-      html2canvas($(".html-content")[0]).then(function (canvas) {
-        var imgData = canvas.toDataURL("image/jpeg", 1.0);
-        var pdf = new jsPDF("p", "pt", [PDF_Width, PDF_Height]);
-        pdf.addImage(
-          imgData,
-          "JPG",
-          top_left_margin,
-          top_left_margin,
-          canvas_image_width,
-          canvas_image_height
-        );
-        for (var i = 1; i <= totalPDFPages; i++) {
-          pdf.addPage(PDF_Width, PDF_Height);
-          pdf.addImage(
-            imgData,
-            "JPG",
-            top_left_margin,
-            -(PDF_Height * i) + top_left_margin * 4,
-            canvas_image_width,
-            canvas_image_height
-          );
-        }
-        pdf.save(testHeaders.report_title);
-        // $(".html-content").hide();
-      });
-    };
-
-    $("#print_pdf").on("click", CreatePDFfromHTML);
+    $("#print_pdf").on("click",function(){
+      CreatePDFfromHTML(testHeaders.report_title);
+    });
   });
 </script>
