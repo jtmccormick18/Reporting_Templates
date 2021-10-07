@@ -34,6 +34,11 @@
     <script src="../js/reports.js"></script>
     <title>SOA Report</title>
   </head>
+  <style>
+    tr:last-child {
+      font-weight: bold;
+    }
+  </style>
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container">
@@ -57,7 +62,8 @@
             <i class="fas fa-file-pdf"></i>
             Print PDF
           </button>
-          <button style="margin-left:2rem;"
+          <button
+            style="margin-left: 2rem"
             type="button"
             class="btn btn-success navbar-btn"
             id="export_csv"
@@ -68,7 +74,7 @@
         </div>
       </div>
     </nav>
-    <div class="container html-content">
+    <div class="container html-content hidden" id="main-wrap">
       <div class="row">
         <div class="col-sm-12 text-center">
           <h1 id="report_county">{{report_county}} , {{report_muni}}</h1>
@@ -238,6 +244,18 @@
     ],
   };
   $(document).ready(function () {
+    let foo = prompt("Enter Password");
+    // let bar = confirm("Confirm or deny");
+    if(foo.toLowerCase()==='aacdcs'){
+      $('#main-wrap').removeClass('hidden');
+    }
+    while(foo!=='aacdcs'){
+      foo=prompt("Try Again!")
+    }
+    // else{
+    //   foo=prompt("Try Again!")
+    // }
+
     $(".table").addClass("table-sm table-bordered");
 
     $(".table thead").addClass("table-dark");
@@ -532,6 +550,5 @@
     $("#export_csv").on("click", function () {
       exportToExcel(testHeaders.report_title);
     });
-    
   });
 </script>

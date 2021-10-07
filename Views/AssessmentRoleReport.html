@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://html2canvas.hertzen.com/dist/html2canvas.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../styles/reports.css" />
+    <script src="../js/reports.js"></script>
+    <title>Assessment Role Report</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <div class="navbar-brand ml-5" href="#">
+          <img
+            src="../assets/AAC_logo.png"
+            width="150"
+            height="30"
+            class="ml-5 d-inline-block align-top"
+            alt=""
+          />
+          Reporting Module
+        </div>
+
+        <div class="nav pull-right">
+          <button
+            type="button"
+            class="btn btn-primary navbar-btn"
+            id="print_pdf"
+          >
+            <i class="fas fa-file-pdf"></i>
+            Print PDF
+          </button>
+          <button
+            style="margin-left: 2rem"
+            type="button"
+            class="btn btn-success navbar-btn"
+            id="export_csv"
+          >
+            <i class="fas fa-file-csv"></i>
+            Export to CSV
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid html-content hidden" id="main-wrap">
+      <div class="row m-5 align-items-center">
+        <div class="col-sm-2">
+          <p id="report_title">Real Estate Assessment Role For:</p>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="report_tvc"></li>
+            </ul>
+            <div class="card-footer text-center">
+              <p class="small"><em>Town - Village - City</em></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1 text-center">
+          <p>of</p>
+        </div>
+        <div class="col-sm-2">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="report_muni"></li>
+            </ul>
+            <div class="card-footer text-center">
+              <p class="small"><em>Municipality</em></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="report_county"></li>
+            </ul>
+            <div class="card-footer text-center">
+              <p class="small"><em>County</em></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="report_districts"></li>
+            </ul>
+            <div class="card-footer text-center">
+              <p class="small"><em>District(s)</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center"></div>
+      <div class="row">
+        <div class="col-sm-8">
+          <table class="table table-bordered table-sm" id="report_config">
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const report_config = {
+    "Assessment Year": 2019,
+    "Town/Village/City": "Westport",
+    Municipality: "Westport",
+    County: "Dane",
+    District: 10,
+    "Suppress Manufacturing Assessed Parcels": "Yes",
+    "Truncate Owner Name(s) to fit on 1 line": "Yes",
+    "Sorted in order by": "Yes",
+  };
+
+  const report_details = {
+    report_type: "Real Estate",
+    report_muni: "WestPort",
+    report_title: "Assessment Role",
+    report_sub_heading: "Manufacturing Value Suppressed",
+    report_tvc:'Town',
+    report_county:'Dane'
+  };
+
+  const report_heading_html=``;
+  const card_html = ``;
+  $(document).ready(function () {
+    $("#report_title").text(title);
+
+    $("#report_info tbody").html(report_info_html);
+    $("#report_config tbody").html(report_config_html);
+  });
+</script>

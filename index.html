@@ -46,13 +46,12 @@
           />
           Reporting Module
         </div>
-
       </div>
     </nav>
-    <div class="container">
+    <div class="container hidden" id="main-wrap">
       <div class="row">
         <div class="h-100 p-5 text-white bg-dark rounded-3">
-          <h1 class="text-center">Report Criteria</h1>
+          <h3 class="text-center">Report Criteria</h3>
           <form>
             <div class="mb-3">
               <div id="tax_key_range" class="form-label">Tax Key Range</div>
@@ -95,7 +94,9 @@
               >Check me out</label
             >
           </div> -->
-            <button type="submit" class="btn btn-primary" disabled>Submit</button>
+            <button type="submit" class="btn btn-primary" disabled>
+              Submit
+            </button>
           </form>
         </div>
       </div>
@@ -126,3 +127,19 @@
     </div>
   </body>
 </html>
+
+<script>
+  $(document).ready(function () {
+    let foo = prompt("Enter Password");
+    // let bar = confirm("Confirm or deny");
+    if(foo.toLowerCase()==='aacdcs'){
+      $('#main-wrap').removeClass('hidden');
+    }
+    while(foo!=='aacdcs'){
+      foo=prompt("Try Again!")
+    }
+    // else{
+    //   foo=prompt("Try Again!")
+    // }
+  });
+</script>
