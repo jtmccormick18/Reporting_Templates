@@ -15,25 +15,73 @@
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+    <link
+      href="//cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+
     <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
-    <script
-      type="text/javascript"
-      src="https://html2canvas.hertzen.com/dist/html2canvas.js"
-    ></script>
+
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
       integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
     <link rel="stylesheet" href="../styles/reports.css" />
     <script src="../js/reports.js"></script>
-    <title>SOA Report</title>
+    <title>Reason For Change Report</title>
   </head>
+  <style>
+    .html-content {
+      /* overflow-x: auto; */
+      overflow: auto;
+      /* white-space: nowrap; */
+    }
+    .ws-normal {
+      white-space: normal;
+    }
+    .ws-no-wrap {
+      white-space: nowrap;
+    }
+    .text-small {
+      font-size: 0.75rem;
+    }
+    .text-xsmall {
+      font-size: 0.75rem;
+    }
+    /* .table thead td,
+    .table thead th,
+    .table thead tr {
+      border-top: none;
+      border-bottom: none;
+    } */
+
+    .no-borders {
+      border: none o !important;
+    }
+    tr:last-child {
+      font-weight: bold;
+    }
+    .table {
+      border-collapse: collapse;
+    }
+    .line_break,
+    .line_break td {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border: none !important;
+    }
+  </style>
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container">
@@ -57,7 +105,8 @@
             <i class="fas fa-file-pdf"></i>
             Print PDF
           </button>
-          <button style="margin-left:2rem;"
+          <button
+            style="margin-left: 2rem"
             type="button"
             class="btn btn-success navbar-btn"
             id="export_csv"
@@ -68,539 +117,683 @@
         </div>
       </div>
     </nav>
-    <div class="container html-content">
-      <div class="row">
-        <div class="col-sm-12 text-center">
-            <h1 id="report_title"><strong>{{report_title}}</strong></h1>
+    <div class="html-content" witdh="100%">
+      <!-- <div class="container-fluid html-content"> -->
+      <div class="container-fluid">
+        <div class="row mt-4" id="title_row">
+          <div class="col-sm-12 text-center">
+            <h3 id="report_title">
+              <strong>
+                REASONS FOR CHANGE SUMMARY REPORT - ASSESSMENT YEAR:
+                <span id="asst_year">2019</span>
+              </strong>
+            </h3>
+          </div>
         </div>
-        <div class="col-sm-12 text-center">
-          
-          <h1 id="report_county">{{report_county}} , {{report_muni}}</h1>
-          <!-- <h5 id="report_sub_heading">{{report_sub_heading}}</h5> -->
+        <div class="container mt-4 mb-4 px-4" id="title">
+          <div class="row gx-5 text-center" id="title_card_row">
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row mt-2">
-        <div class="col-sm-12">
-          <table class="table" id="SOA1">
-            <thead class="thead-dark">
-              <tr id="main" class="align-middle text-center"></tr>
-              <tr id="sub" class="align-middle text-center"></tr>
-            </thead>
-            <tbody id="SOA1content"></tbody>
-          </table>
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <table class="table table-bordered">
+              <thead class="thead-dark" id="RFC_Head">
+                <tr class="fw-bold" id="RFC_Top_Header">
+                  <td rowspan="5" id="RFC_RE" class="p-3">REAL ESTATE</td>
+                  <td colspan="4" rowspan="3">
+                    LAST YEAR'S ASSESSMENT ROLL TOTALS
+                  </td>
+                  <td colspan="6" class="table-secondary">
+                    INCREASES IN ASSESSED VALUES DUE TO:
+                  </td>
+                  <td colspan="2">+ OR -</td>
+                  <td colspan="6" class="table-secondary">
+                    DECREASES IN ASSESSED VALUES DUE TO:
+                  </td>
+                  <td colspan="4" rowspan="3">
+                    THIS YEAR'S ASSESSMENT ROLL TOTALS
+                  </td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td colspan="2">4</td>
+                  <td>5</td>
+                  <td colspan="2">6</td>
+                  <td>7</td>
+                  <td>8</td>
+                  <td>9</td>
+                  <td colspan="2">10</td>
+                  <td>11</td>
+                </tr>
+                <tr id="value_inc_dec_descripions">
+                  <td rowspan="2">Annexation - Gain</td>
+                  <td rowspan="2">New Construction or Higher Land Use</td>
+                  <td rowspan="2">
+                    Extreme Economic Obsolescence &ndash; Removal
+                  </td>
+                  <td colspan="2" rowspan="2">
+                    From Exempt or from Personal Property
+                  </td>
+                  <td rowspan="2">Revaluation Increase</td>
+                  <td colspan="2" rowspan="2">
+                    Net Value Shift(s) in Classification
+                  </td>
+                  <td rowspan="2">Annexation &ndash; Loss</td>
+                  <td rowspan="2">Property Destroyed or Removed</td>
+                  <td rowspan="2">Extreme Economic Obsolescence</td>
+                  <td colspan="2" rowspan="2">
+                    To Exempt or to Personal Property
+                  </td>
+                  <td rowspan="2">Revaluation Decrease</td>
+                </tr>
+                <tr class="fw-bold" id="RFC_Years">
+                  <td colspan="4" id="RFC_Previous">2018</td>
+                  <td colspan="4" id="RFC_Current">2019</td>
+                </tr>
+                <tr id="title_sub_columns">
+                  <td></td>
+                  <td>Parcel Count</td>
+                  <td>No. of Acres</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td>No. of Acres</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td>No. of Acres</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td>No. of Acres</td>
+                  <td>Assessed Value</td>
+                  <td>Assessed Value</td>
+                  <td></td>
+                  <td>Parcel Count</td>
+                  <td>No. of Acres</td>
+                  <td>Assessed Value</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="3">Class "1" Residential</td>
+                  <td>Land</td>
+                  <td>1,962</td>
+                  <td></td>
+                  <td>$283,032,500</td>
+                  <td>$161,000</td>
+                  <td>$11,830,000</td>
+                  <td>$0</td>
+                  <td>5.921</td>
+                  <td>$142,300</td>
+                  <td>$64,573,650</td>
+                  <td>-0.900</td>
+                  <td>-$16,828,850</td>
+                  <td>$0</td>
+                  <td>-$377,500</td>
+                  <td>$0</td>
+                  <td>-4.449</td>
+                  <td>-$33,000</td>
+                  <td>-$4,394,800</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$338,105,300</td>
+                </tr>
+                <tr>
+                  <td>Impts.</td>
+                  <td>1,710</td>
+                  <td></td>
+                  <td>$404,870,500</td>
+                  <td>$117,900</td>
+                  <td>$6,965,900</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>$101,740,200</td>
+                  <td></td>
+                  <td>$568,900</td>
+                  <td>$0</td>
+                  <td>-$312,000</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>-$9,455,400</td>
+                  <td>Impts.</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$504,496,000</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td></td>
+                  <td>1,428</td>
+                  <td>$687,903,000</td>
+                  <td>$278,900</td>
+                  <td>$18,795,900</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$142,300</td>
+                  <td>$166,313,850</td>
+                  <td></td>
+                  <td>-$16,259,950</td>
+                  <td>$0</td>
+                  <td>-$689,500</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>-$33,000</td>
+                  <td>-$13,850,200</td>
+                  <td>Total</td>
+                  <td></td>
+                  <td>1,429</td>
+                  <td>$842,601,300</td>
+                </tr>
+                <tr>
+                  <td rowspan="3">Class "2" Commercial</td>
+                  <td>Land</td>
+                  <td>119</td>
+                  <td></td>
+                  <td>$17,692,300</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>1.814</td>
+                  <td>$0</td>
+                  <td>$5,909,800</td>
+                  <td>26.581</td>
+                  <td>$79,200</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>-5.921</td>
+                  <td>$0</td>
+                  <td>-$602,800</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$23,078,500</td>
+                </tr>
+                <tr>
+                  <td>Impts.</td>
+                  <td>92</td>
+                  <td></td>
+                  <td>$36,421,700</td>
+                  <td>$0</td>
+                  <td>$943,000</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>$3,645,500</td>
+                  <td></td>
+                  <td>$204,300</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>-$1,311,300</td>
+                  <td>Impts.</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$39,903,200</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td></td>
+                  <td>595</td>
+                  <td>$54,114,000</td>
+                  <td>$0</td>
+                  <td>$943,000</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>$9,555,300</td>
+                  <td></td>
+                  <td>$283,500</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>-$1,914,100</td>
+                  <td>Total</td>
+                  <td></td>
+                  <td>617</td>
+                  <td>$62,981,700</td>
+                </tr>
+                <tr rowspan="2">
+                  <td>Class "4" Agricultural</td>
+                  <td>Land</td>
+                  <td>345</td>
+                  <td>6,563</td>
+                  <td>$1,552,900</td>
+                  <td>$1,200</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>1.190</td>
+                  <td>$200</td>
+                  <td>$328,850</td>
+                  <td>-112.499</td>
+                  <td>$16,774,350</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>-47.500</td>
+                  <td>-$8,700</td>
+                  <td>-$16,789,600</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td>6,404</td>
+                  <td>$1,859,200</td>
+                </tr>
+                <tr rowspan="2">
+                  <td>Class "5" Undeveloped</td>
+                  <td>Land</td>
+                  <td>192</td>
+                  <td>882</td>
+                  <td>$617,300</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>35.543</td>
+                  <td>$2,200</td>
+                  <td>$571,900</td>
+                  <td>34.098</td>
+                  <td>$243,800</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>-4.157</td>
+                  <td>-$200</td>
+                  <td>-$550,400</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td>947</td>
+                  <td>$884,600</td>
+                </tr>
+                <tr rowspan="3">
+                  <td>Class "5m" Agricultural Forest</td>
+                  <td>Land</td>
+                  <td>43</td>
+                  <td>130</td>
+                  <td>$551,500</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>0.000</td>
+                  <td>$0</td>
+                  <td>$110,100</td>
+                  <td>21.820</td>
+                  <td>$240,400</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>0.000</td>
+                  <td>$0</td>
+                  <td>-$172,200</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td>152</td>
+                  <td>$729,800</td>
+                </tr>
+                <tr rowspan="2">
+                  <td>Class "6" Forest</td>
+                  <td>Land</td>
+                  <td>3</td>
+                  <td>37</td>
+                  <td>$331,600</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>0.000</td>
+                  <td>$0</td>
+                  <td>$278,900</td>
+                  <td>18.100</td>
+                  <td>-$89,400</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>0.000</td>
+                  <td>$0</td>
+                  <td>-$30,900</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td>55</td>
+                  <td>$490,200</td>
+                </tr>
+                <tr>
+                  <td rowspan="3">Class "7" Other</td>
+                  <td>Land</td>
+                  <td>56</td>
+                  <td></td>
+                  <td>$4,368,900</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>0.000</td>
+                  <td>$0</td>
+                  <td>$2,540,800</td>
+                  <td>13.371</td>
+                  <td>-$399,700</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>-1.000</td>
+                  <td>-$65,000</td>
+                  <td>-$370,000</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$6,075,000</td>
+                </tr>
+                <tr>
+                  <td>Impts.</td>
+                  <td>55</td>
+                  <td></td>
+                  <td>$8,933,000</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>$1,450,900</td>
+                  <td></td>
+                  <td>-$598,100</td>
+                  <td>$0</td>
+                  <td>-$76,400</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>-$714,500</td>
+                  <td>Impts.</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$8,994,900</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td></td>
+                  <td>134</td>
+                  <td>$13,301,900</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>$3,991,700</td>
+                  <td></td>
+                  <td>-$997,800</td>
+                  <td>$0</td>
+                  <td>-$76,400</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>-$65,000</td>
+                  <td>-$1,084,500</td>
+                  <td>Total</td>
+                  <td></td>
+                  <td>146</td>
+                  <td>$15,069,900</td>
+                </tr>
+                <tr>
+                  <td rowspan="3">TOTALS</td>
+                  <td>Land</td>
+                  <td>2,720</td>
+                  <td></td>
+                  <td>$308,147,000</td>
+                  <td>$162,200</td>
+                  <td>$11,830,000</td>
+                  <td>$0</td>
+                  <td>44.468</td>
+                  <td>$144,700</td>
+                  <td>$74,314,000</td>
+                  <td>0.571</td>
+                  <td>$19,800</td>
+                  <td>$0</td>
+                  <td>-$377,500</td>
+                  <td>$0</td>
+                  <td>-63.027</td>
+                  <td>-$106,900</td>
+                  <td>-$22,910,700</td>
+                  <td>Land</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$296,908,600</td>
+                </tr>
+                <tr>
+                  <td>Impts.</td>
+                  <td>1,857</td>
+                  <td></td>
+                  <td>$450,225,200</td>
+                  <td>$117,900</td>
+                  <td>$7,908,900</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$175,100</td>
+                  <td>$0</td>
+                  <td>-$388,400</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$0</td>
+                  <td>-$11,481,200</td>
+                  <td>Impts.</td>
+                  <td>0</td>
+                  <td></td>
+                  <td>$446,557,500</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td></td>
+                  <td>9,769</td>
+                  <td>$758,372,200</td>
+                  <td>$280,100</td>
+                  <td>$19,738,900</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>$144,700</td>
+                  <td>$74,314,000</td>
+                  <td></td>
+                  <td>$194,900</td>
+                  <td>$0</td>
+                  <td>-$765,900</td>
+                  <td>$0</td>
+                  <td></td>
+                  <td>-$106,900</td>
+                  <td>-$34,391,900</td>
+                  <td>Total</td>
+                  <td></td>
+                  <td>9,751</td>
+                  <td>$743,466,100</td>
+                </tr>
+                <tr class="line_break" rowspan="3">
+                  <td class="table-borderless">
+                    &nbsp;
+                    <!--you just need a space in a row-->
+                  </td>
+                </tr>
+                <tr id="DOR_Man_Shifts">
+                  <td rowspan="3">Class "3" DOR Manufacturing Shifts</td>
+                  <td>Land</td>
+                  <td colspan="5" rowspan="3"></td>
+                  <td rowspan="2">Parcel Count</td>
+                  <td>0.000</td>
+                  <td>$0</td>
+                  <td rowspan="3"></td>
+                  <td>-0.571</td>
+                  <td>-$20,000</td>
+                  <td colspan="2" rowspan="3"></td>
+                  <td rowspan="2">Parcel Count</td>
+                  <td>-0.571</td>
+                  <td>-$20,000</td>
+                  <td colspan="5" rowspan="3"></td>
+                </tr>
+                <tr>
+                  <td>Impts.</td>
+                  <td rowspan="2"></td>
+                  <td>$0</td>
+                  <td rowspan="2"></td>
+                  <td>-$175,100</td>
+                  <td rowspan="2"></td>
+                  <td>-$175,100</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>-$195,100</td>
+                  <td>1</td>
+                  <td>-$195,100</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-10">
-          <table class="table" id="SOA2">
-            <thead class="thead-dark">
-              <tr id="main2" class="align-middle text-center"></tr>
-              <tr id="sub2" class="align-middle text-center"></tr>
-            </thead>
-            <tbody id="SOA2content"></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8">
-          <table class="table" id="SOA3">
-            <thead class="thead-dark">
-              <tr id="main3" class="align-middle text-center"></tr>
-              <tr id="sub3" class="align-middle text-center"></tr>
-            </thead>
-            <tbody id="SOA3content"></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <p class="small text-left">
-          * Total parcel count may not equal the sum of the classes because a
-          single tax key number can have land or improvements in more than one
-          class.
-        </p>
       </div>
     </div>
   </body>
 </html>
 
 <script>
-  const table1Data = {
-    headers: [
-      {
-        title: "Real Estate",
-        data_column: "TBD",
-      },
-      {
-        title: "Last Year's Assessment Roll Totals",
-        data_column: "TBD",
-        sub_columns:[
-            {
-                title:'',
-                data_column:''
-            },
-            {
-                title:'Parcel Count',
-                data_column:'TBD'
-            },
-            {
-                title:'No. of Acres',
-                data_column:'TBD'
-            },
-            {
-                title:'Assessed Value',
-                data_column:'TBD'
-            }
-        ]
-      },
-      {
-        title: "Parcel Counts",
-        data_column: "TBD",
-        sub_columns: [
-          {
-            title: "Land",
-            data_column: "TBD",
-          },
-          {
-            title: "Impts",
-            data_column: "TBD",
-          },
-        ],
-      },
-      {
-        title: "Acres",
-        data_column: "TBD",
-      },
-      {
-        title: "Assessed Value",
-        data_column: "TBD",
-        sub_columns: [
-          {
-            title: "Land",
-            data_column: "TBD",
-          },
-          {
-            title: "Improvements",
-            data_column: "TBD",
-          },
-          {
-            title: "Total",
-            data_column: "TBD",
-          },
-        ],
-      },
-    ],
+  const translations = {
+    TVC: "Town-Village-City",
+    MuniName: "Municipality Name",
+    CountyName: "County Name",
+    District: "District",
+  };
+  const needsHelpers = {
+    TVC: "FOR",
+    MuniName: "OF",
+  };
+  const headers = {
+    TVC: "TOWN",
+    MuniName: "WESTPORT",
+    CountyName: "DANE",
+    District: "ALL DISTRICTS",
   };
 
-  const table2Data = {
-    headers: [
-      {
-        title: "Land in Forest Programs",
-        data_column: "TBD",
-      },
-      {
-        title: "Class Code",
-        data_column: "TBD",
-      },
-      {
-        title: "Parcel Counts",
-        data_column: "TBD",
-        sub_columns: [
-          {
-            title: "Land",
-            data_column: "TBD",
-          },
-          {
-            title: "Impts",
-            data_column: "TBD",
-          },
-        ],
-      },
-      {
-        title: "Acres",
-        data_column: "TBD",
-      },
-      {
-        title: "Assessed Value of Land",
-        data_column: "TBD",
-      },
-    ],
+  const title_card = (type) => {
+    const field = type;
+    const value = headers[type];
+    const description = translations[type];
+    const helper = needsHelpers[type];
+
+    return ` <div class="col" id="${field}">
+            <dl class="row align-items-center">
+              <dt class="col-sm-3">${helper || ""}</dt>
+              <dd class="col-sm-9">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item value">${value}</li>
+                  <li class="list-group-item description fst-italic">
+                    ${description}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+          `;
   };
 
-  const table3Data = {
-    headers: [
-      {
-        title: "Exempt Real Estate",
-        data_column: "TBD",
-      },
-      {
-        title: "Class Code",
-        data_column: "TBD",
-      },
-      {
-        title: "Parcel Counts",
-        data_column: "TBD",
-        sub_columns: [
-          {
-            title: "Land",
-            data_column: "TBD",
-          },
-          {
-            title: "Impts",
-            data_column: "TBD",
-          },
-        ],
-      },
-      {
-        title: "Acres",
-        data_column: "TBD",
-      },
-    ],
-  };
-
-  const RE_Groupings=[
-      {
-        class:1,
-        title:'Residential',
-        rows:['Land','Impts.','Total']
-  },
-  {
-        class:2,
-        title:'Commercial',
-        rows:['Land','Impts.','Total']
-  },{
-        class:4,
-        title:'Agricultural',
-        rows:['Land']
-  },{
-        class:5,
-        title:'Undeveloped',
-        rows:['Land']
-  },{
-        class:'5m',
-        title:'Agricultural Forest',
-        rows:['Land']
-  },{
-        class:6,
-        title:'Forest',
-        rows:['Land']
-  },{
-        class:7,
-        title:'Other',
-        rows:['Land','Impts.','Total']
-  },
-  {
-      class:null,
-      title:'Totals',
-      rows:['Land','Impts.','Total']
-  }
-];
-
-
-    const generateTableHTML = function (categories_array) {
-      let sub_category_html = "";
-      const categories = categories_array.map((category) => {
-          return `<th scope="col" rowspan="${category.rows.length}" data-attr="${category.class}">${category.title}</th>`;
-         
-      });
-      return categories
-    };
-
-    const SOA_Main_Table_Category_HTML = generateTableHTML(RE_Groupings);
-    $("#SOA1 #main").html(SOA_Main_Table_Category_HTML);
-
-
+  let title_keys = Object.keys(headers);
+  const title_cards_html = title_keys.map((key) => title_card(key)).join("");
 
   $(document).ready(function () {
-    $(".table").addClass("table-sm table-bordered");
+    $("#title_card_row").html(title_cards_html);
 
-    $(".table thead").addClass("table-dark");
+    $(".table").each(function () {
+      $(this)
+        .children("thead")
+        .each(function () {
+          $(this).addClass("align-middle ws-no-wrap");
+        });
+      $(this).addClass("text-center table-sm text-small w-auto");
+    });
+    $(".table tr").each(function () {
+      const rowspan = parseInt($(this).attr("rowspan"));
+      rowspan > 1 && $(this).addClass("align-middle");
+      const is_thead_row = $(this).parent().is("thead");
+      if (is_thead_row) {
+        $(this).addClass("text-small");
+        const is_description_row =
+          $(this).attr("id") === "value_inc_dec_descripions";
+        // const is_sub_column_row=$(this).attr("id")==="title_sub_columns";
+        let word_wrap = is_description_row ? "ws-normal" : "ws-no-wrap";
+        // word_wrap=is_sub_column_row ? "ws-no-wrap" :"ws-normal";
+        $(this).addClass(word_wrap);
 
-    const generateTableHTML = function (header_array) {
-      let sub_category_html = "";
-      const headers = header_array.map((column) => {
-        if (!column["sub_columns"] || column["sub_columns"].length < 1) {
-          return `<th scope="col" rowspan="2" data-attr="${column.data_column}">${column.title}</th>`;
-        } else {
-          column["sub_columns"].forEach(
-            (sub) =>
-              (sub_category_html += `<th scope="col" data-attr="${sub.data_column}"> ${sub.title}</th>`)
-          );
-          return `<th scope="col" colspan="${column["sub_columns"].length}">${column.title}</th>`;
-        }
-      });
-      return {
-        main: headers,
-        sub: sub_category_html,
-      };
-    };
+        $(this)
+          .children("td")
+          .each(function () {
+            // $(this).addClass("text-xsmall");
+            // const rowspan = parseInt($(this).attr("rowspan"));
+            // rowspan > 1 && $(this).addClass("align-middle");
+            $(this).text() == "" && $(this).addClass("table-secondary");
+          });
+      } else {
+        $(this)
+          .children("td")
+          .each(function () {
+            $(this).addClass("text-xsmall");
+            const rowspan = parseInt($(this).attr("rowspan"));
+            rowspan > 1 && $(this).addClass("align-middle");
+            $(this).text() == "" && $(this).addClass("table-secondary");
+          });
+      }
+    });
 
-    const SOA_Main_Table_Category_HTML = generateTableHTML(table1Data.headers);
-    $("#SOA1 #main").html(SOA_Main_Table_Category_HTML.main);
-    $("#SOA1 #sub").html(SOA_Main_Table_Category_HTML.sub);
+    // window.addEventListener("mousewheel", function (e) {
+    //   e.preventDefault();
+    //   var step = -100;
+    //   if (e.wheelDelta < 0) {
+    //     step *= -1;
+    //   }
+    //   var newPos = window.pageXOffset + step;
+    //   $("body").scrollLeft(newPos);
+    // });
 
-    const generateTableBodyHTML = function (data) {
-      return data.map((obj) => {
-        // let values = Object.values(obj);
-        // let html = values.map(
-        //   (value) => {console.log({value})
-        //    return `<td  rowspanclass="${!value ? "table-secondary" : "table-light"}">${
-        //       !value ? "" : value
-        //     }</td>`}
-        // );
-        console.log({obj});
-        let html=`<td rowspan="${obj.rows.length}" class="table-light">${obj.title}</td>`
-        let rows=obj.rows.map(item=>`<td>${item}</td>`)
-        html+=rows;
-        const row = `<tr>${html}</tr>`;
-        return row;
-      });
-    };
-    const tableBody1HTML = generateTableBodyHTML(RE_Groupings);
-
-    const testHeaders = {
-      report_county: "Dane County",
-      report_muni: "Town of WestPort",
-      report_title: "Reasons for Change Summary Report - Assessment Year 2019",
-      report_sub_heading: "Manufacturing Value Suppressed",
-    };
-
-    for (let [key, val] of Object.entries(testHeaders)) {
-      $(`#${key}`).text(val);
-    }
-    // const testData1 = [
-    //   {
-    //     "Taxable Real Estate": "Residential",
-    //     "Class Code": "1",
-    //     Acres: "1,927 ",
-    //     Land: "1,724 ",
-    //     Impts: "1,423.327 ",
-    //     Land2: "$337,759,800 ",
-    //     Improvements: "$503,332,400 ",
-    //     Total: "$841,092,200 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Commercial",
-    //     "Class Code": "2",
-    //     Acres: "122 ",
-    //     Land: "94 ",
-    //     Impts: "617.228 ",
-    //     Land2: "$23,078,500 ",
-    //     Improvements: "$39,903,200 ",
-    //     Total: "$62,981,700 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Manufacturing",
-    //     "Class Code": "3",
-    //     Acres: "9 ",
-    //     Land: "0 ",
-    //     Impts: "172.677 ",
-    //     Land2: "$0 ",
-    //     Improvements: "$0 ",
-    //     Total: "$0 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Agricultural",
-    //     "Class Code": "4",
-    //     Acres: "365 ",
-    //     Land: "",
-    //     Impts: "6,276.149 ",
-    //     Land2: "$1,829,700 ",
-    //     Improvements: "",
-    //     Total: "$1,829,700 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Undeveloped",
-    //     "Class Code": "5",
-    //     Acres: "201 ",
-    //     Land: "",
-    //     Impts: "945.007 ",
-    //     Land2: "$883,000 ",
-    //     Improvements: "",
-    //     Total: "$883,000 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Agricultural use forest",
-    //     "Class Code": "5m",
-    //     Acres: "46 ",
-    //     Land: "",
-    //     Impts: "151.636 ",
-    //     Land2: "$729,800 ",
-    //     Improvements: "",
-    //     Total: "$729,800 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Productive forest",
-    //     "Class Code": "6",
-    //     Acres: "11 ",
-    //     Land: "",
-    //     Impts: "54.944 ",
-    //     Land2: "$490,200 ",
-    //     Improvements: "",
-    //     Total: "$490,200 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Agricultural homesite",
-    //     "Class Code": "7",
-    //     Acres: "49 ",
-    //     Land: "0 ",
-    //     Impts: "144.154 ",
-    //     Land2: "$5,985,000 ",
-    //     Improvements: "$8,747,900 ",
-    //     Total: "$14,732,900 ",
-    //   },
-    //   {
-    //     "Taxable Real Estate": "Total taxable real estate",
-    //     "Class Code": "",
-    //     Acres: "2393*",
-    //     Land: "1866*",
-    //     Impts: "9,785.122 ",
-    //     Land2: "$370,756,000 ",
-    //     Improvements: "$551,983,500 ",
-    //     Total: "$922,739,500 ",
-    //   },
-    // ];
-
-    // const testData2 = [
-    //   {
-    //     "Land in Forest Programs": "Private forest crop post 1971",
-    //     "Class Code": "W1",
-    //     Land: "",
-    //     Impts: "",
-    //     Acres: null,
-    //     "Assessed Value of Land": null,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Private forest crop pre 1972",
-    //     "Class Code": "W2",
-    //     Land: "",
-    //     Impts: "",
-    //     Acres: null,
-    //     "Assessed Value of Land": null,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Forest crop special",
-    //     "Class Code": "W3",
-    //     Land: "",
-    //     Impts: "",
-    //     Acres: null,
-    //     "Assessed Value of Land": null,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "County forest crop",
-    //     "Class Code": "W4",
-    //     Land: "",
-    //     Impts: "",
-    //     Acres: null,
-    //     "Assessed Value of Land": null,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Managed forest law open post 2004",
-    //     "Class Code": "W5",
-    //     Land: "",
-    //     Impts: "",
-    //     Acres: null,
-    //     "Assessed Value of Land": null,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Managed forest law closed post 2004",
-    //     "Class Code": "W6",
-    //     Land: "1",
-    //     Impts: "",
-    //     Acres: 12,
-    //     "Assessed Value of Land": 108000,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Managed forest law open pre 2005",
-    //     "Class Code": "W7",
-    //     Land: "",
-    //     Impts: "",
-    //     Acres: null,
-    //     "Assessed Value of Land": null,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Managed forest law closed pre 2005",
-    //     "Class Code": "W8",
-    //     Land: "1",
-    //     Impts: "",
-    //     Acres: 12,
-    //     "Assessed Value of Land": 108000,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Managed forest law closed ferrous mining",
-    //     "Class Code": "W9",
-    //     Land: "",
-    //     Impts: "",
-    //     Acres: null,
-    //     "Assessed Value of Land": null,
-    //   },
-    //   {
-    //     "Land in Forest Programs": "Total land in forest programs",
-    //     "Class Code": "",
-    //     Land: "2*",
-    //     Impts: "",
-    //     Acres: 24,
-    //     "Assessed Value of Land": 216000,
-    //   },
-    // ];
-    // const testData3 = [
-    //   {
-    //     "Exempt Real Estate": "Exempt federal",
-    //     "Class Code": "X1",
-    //     Land: "0",
-    //     Impts: "0",
-    //     Acres: 0,
-    //   },
-    //   {
-    //     "Exempt Real Estate": "Exempt state",
-    //     "Class Code": "X2",
-    //     Land: "64",
-    //     Impts: "0",
-    //     Acres: 1078.609,
-    //   },
-    //   {
-    //     "Exempt Real Estate": "Exempt county",
-    //     "Class Code": "X3",
-    //     Land: "52",
-    //     Impts: "5",
-    //     Acres: 1070.381,
-    //   },
-    //   {
-    //     "Exempt Real Estate": "Exempt local",
-    //     "Class Code": "X4",
-    //     Land: "88",
-    //     Impts: "2",
-    //     Acres: 565.254,
-    //   },
-    //   {
-    //     "Exempt Real Estate": "Exempt other",
-    //     "Class Code": "X4",
-    //     Land: "248",
-    //     Impts: "216",
-    //     Acres: 241.295,
-    //   },
-    //   {
-    //     "Exempt Real Estate": "Total exempt real estate",
-    //     "Class Code": "",
-    //     Land: "452*",
-    //     Impts: "223*",
-    //     Acres: 2955.539,
-    //   },
-    // ];
-
-    
-    // const tableBody2HTML = generateTableBodyHTML(testData2);
-    // const tableBody3HTML = generateTableBodyHTML(testData3);
-
-    $("#SOA1 tbody").html(tableBody1HTML);
-    // $("#SOA2 tbody").html(tableBody2HTML);
-    // $("#SOA3 tbody").html(tableBody3HTML);
+    var element = $(".html-content").get(0);
 
     $("#print_pdf").on("click", function () {
-      CreatePDFfromHTML(testHeaders.report_title);
+      // CreatePDFfromHTML(testHeaders.report_title);
+      CreatePDFfromHTML("Reason_For_Change", 2);
     });
+
     $("#export_csv").on("click", function () {
       exportToExcel(testHeaders.report_title);
     });
-    
   });
 </script>

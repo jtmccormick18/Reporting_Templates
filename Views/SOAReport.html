@@ -74,7 +74,7 @@
         </div>
       </div>
     </nav>
-    <div class="container html-content hidden" id="main-wrap">
+    <div class="container html-content" id="main-wrap">
       <div class="row">
         <div class="col-sm-12 text-center">
           <h1 id="report_county">{{report_county}} , {{report_muni}}</h1>
@@ -244,18 +244,6 @@
     ],
   };
   $(document).ready(function () {
-    let foo = prompt("Enter Password");
-    // let bar = confirm("Confirm or deny");
-    if(foo.toLowerCase()==='aacdcs'){
-      $('#main-wrap').removeClass('hidden');
-    }
-    while(foo!=='aacdcs'){
-      foo=prompt("Try Again!")
-    }
-    // else{
-    //   foo=prompt("Try Again!")
-    // }
-
     $(".table").addClass("table-sm table-bordered");
 
     $(".table thead").addClass("table-dark");

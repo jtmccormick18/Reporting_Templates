@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="//cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="../styles/reports.css" />
+    <script src="../js/reports.js"></script>
+    <title>Assessment Role Totals</title>
+  </head>
+  <style>
+    .html-content {
+      /* overflow-x: auto; */
+      overflow: auto;
+      /* white-space: nowrap; */
+    }
+    .ws-normal {
+      white-space: normal;
+    }
+    .ws-no-wrap {
+      white-space: nowrap;
+    }
+    .text-small {
+      font-size: 0.75rem;
+    }
+    .text-xsmall {
+      font-size: 0.75rem;
+    }
+    /* .table thead td,
+    .table thead th,
+    .table thead tr {
+      border-top: none;
+      border-bottom: none;
+    } */
+
+    .no-borders {
+      border: none !important;
+    }
+    tr:last-child {
+      font-weight: bold;
+    }
+    .table {
+      border-collapse: collapse;
+    }
+    .line_break,
+    .line_break td {
+      padding-top: 0.33rem;
+      padding-bottom: 0.33rem;
+      border: none !important;
+    }
+  </style>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <div class="navbar-brand ml-5" href="#">
+          <img src="../assets/AAC_logo.png" " height="30" class="ml-5 d-inline-block align-top" alt="" /> Reporting Module
+        </div>
+
+        <div class="nav pull-right">
+          <button type="button" class="btn btn-primary navbar-btn" id="print_pdf">
+            <i class="fas fa-file-pdf"></i>
+            Print PDF
+          </button>
+          <button style="margin-left: 2rem" type="button" class="btn btn-success navbar-btn" id="export_csv">
+            <i class="fas fa-file-csv"></i>
+            Export to CSV
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="html-content" witdh="100%">
+      <!-- <div class="container-fluid html-content"> -->
+      <div class="container-fluid">
+        <div class="row mt-4" id="title_row">
+          <div class="col-sm-12 text-center">
+            <h3 id="report_title">
+              <strong>
+                Assessment Role Totals - ASSESSMENT YEAR:
+                <span id="asst_year">2019</span>
+              </strong>
+            </h3>
+          </div>
+        </div>
+        <div class="container mt-4 mb-4 px-4" id="title">
+          <div class="row gx-5 text-center" id="title_card_row">
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item value">An item</li>
+                <li class="list-group-item description">A second item</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <table class="table table-bordered align-middle" id="TRE">
+              <thead class="thead-dark text-center fw-bold table-secondary">
+                <tr>
+                  <td rowspan="2">REAL ESTATE</td>
+                  <td rowspan="2">CLASS CODE</td>
+                  <td colspan="2">PARCEL COUNTS</td>
+                  <td rowspan="2">NO. OF ACRES</td>
+                  <td rowspan="2">VALUE OF LAND</td>
+                  <td rowspan="2">VALUE OF IMPROVEMENTS</td>
+                  <td rowspan="2">TOTAL VALUE OF LAND AND IMPROVEMENTS</td>
+                </tr>
+                <tr>
+                  <td>LAND</td>
+                  <td>IMPROVEMENTS</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <table class="table table-bordered align-middle" id="FC">
+              <thead class="thead-dark text-center fw-bold table-secondary">
+                <tr>
+                  <td rowspan="2">MANAGED FOREST AND FOREST CROP</td>
+                  <td rowspan="2">CLASS CODE</td>
+                  <td colspan="2">PARCEL COUNTS</td>
+                  <td rowspan="2">NO. OF ACRES</td>
+                  <td rowspan="2">VALUE OF LAND</td>
+                </tr>
+                <tr>
+                  <td>LAND</td>
+                  <td>IMPROVEMENTS</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <table class="table table-bordered align-middle" id="EXEMPT">
+              <thead class="thead-dark text-center fw-bold table-secondary">
+                <tr>
+                  <td rowspan="2">EXEMPT LAND</td>
+                  <td rowspan="2">CLASS CODE</td>
+                  <td colspan="2">PARCEL COUNTS</td>
+                  <td rowspan="2">NO. OF ACRES</td>
+                </tr>
+                <tr>
+                  <td>LAND</td>
+                  <td>IMPROVEMENTS</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <hr />
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <table class="table table-bordered align-middle" id="PP">
+              <thead class="thead-dark text-center fw-bold table-primary">
+                <tr>
+                  <td colspan="2" rowspan="2">PERSONAL PROPERTY</td>
+                  <td colspan="2">LOCALLY ASSESSED</td>
+                  <td colspan="2">DOR MANUFACTURING ASSESSED</td>
+                  <td colspan="2">MERGED</td>
+                </tr>
+                <tr>
+                  <td>NO. OF ACCOUNTS</td>
+                  <td>TOTAL VALUE</td>
+                  <td>NO. OF ACCOUNTS</td>
+                  <td>TOTAL VALUE</td>
+                  <td>NO. OF ACCOUNTS</td>
+                  <td>TOTAL VALUE</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <hr />
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <table class="table table-bordered align-middle" id="AG_ASSD_VAL">
+              <thead class="thead-dark text-center fw-bold table-secondary">
+                <tr>
+                  <td colspan="7">
+                    AGGREGATE ASSESSED VALUE OF ALL PROPERTY SUBJECT TO THE GENERAL PROPERTY TAX&nbsp;&nbsp;&nbsp;&nbsp;
+                  </td>
+                  <td>$924,933,000</td>
+                </tr>
+                <tr>
+                  <td colspan="5"></td>
+                  <td colspan="2" rowspan="2">TAXATION DISTRICT TOTALS</td>
+                  <td>NO. OF ACRES</td>
+                </tr>
+                <tr>
+                  <td colspan="5"></td>
+
+                  <td>12,789</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  const translations = {
+    TVC: "Town-Village-City",
+    MuniName: "Municipality Name",
+    CountyName: "County Name",
+    District: "District",
+  };
+  const needsHelpers = {
+    TVC: "FOR",
+    MuniName: "OF",
+  };
+  const headers = {
+    TVC: "TOWN",
+    MuniName: "WESTPORT",
+    CountyName: "DANE",
+    District: "ALL DISTRICTS",
+  };
+  const title_card = (type) => {
+    const field = type;
+    const value = headers[type];
+    const description = translations[type];
+    const helper = needsHelpers[type];
+
+    return ` <div class="col" id="${field}">
+            <dl class="row align-items-center">
+              <dt class="col-sm-3">${helper || ""}</dt>
+              <dd class="col-sm-9">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item value">${value}</li>
+                  <li class="list-group-item description fst-italic">
+                    ${description}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+          `;
+  };
+
+  let title_keys = Object.keys(headers);
+  const title_cards_html = title_keys.map((key) => title_card(key)).join("");
+
+  const TRE_data = [
+    ["RESIDENTIAL", "1", "1928", "", "1423.327", "337759800", "503332400", "841092200"],
+    ["COMMERCIAL", "2", "122", "", "617.228", "23078500", "39903200", "62981700"],
+    ["MANUFACTURING", "3", "9", "", "172.677", "", "0", "0"],
+    ["AGRICULTURAL", "4", "671", "", "6276.149", "1829700", "", "1829700"],
+    ["UNDEVELOPED", "5", "242", "", "945.007", "883000", "", "883000"],
+    ["AGRICULTURAL FOREST", "5m", "47", "", "151.636", "729800", "", "729800"],
+    ["PRODUCTIVE FOREST LAND", "6", "13", "", "78.944", "706200", "", "706200"],
+    ["OTHER (Agri homesite)", "7", "49", "", "144.154", "5985000", "8747900", "14732900"],
+    [],
+    ["TOTAL REAL ESTATE - ALL COLUMNS", "", "3081", "0", "9809.122", "370972000", "551983500", "922955500"],
+  ];
+
+  const FC_data = [
+    ["PRIVATE FOREST CROP PRE-1972", "W1", "", "", "", ""],
+    ["PRIVATE FOREST CROP POST-1971", "W2", "", "", "", ""],
+    ["FOREST CROP SPECIAL", "W3", "", "", "", ""],
+    ["COUNTY FOREST CROP", "W4", "", "", "", ""],
+    ["MANAGED FOREST LAW OPEN POST-2004", "W5", "", "", "", ""],
+    ["MANAGED FOREST LAW CLOSED POST-2004", "W6", "1", "", "12", ""],
+    ["MANAGED FOREST LAW OPEN PRE-2005", "W7", "", "", "", ""],
+    ["MANAGED FOREST LAW CLOSED PRE-2005", "W8", "1", "", "12", ""],
+    ["MFL CLOSED FERROUS MINING", "W9", "", "", "", ""],
+    [],
+    ["TOTAL MANAGED FOREST AND FOREST CROP- ALL COLUMNS", "", "2", "", "24", "0"],
+  ];
+
+  const EXEMPT_data = [
+    ["EXEMPT FEDERAL", "X1", "0", "", "0"],
+    ["EXEMPT STATE", "X2", "64", "", "1078.609"],
+    ["EXEMPT COUNTY", "X3", "62", "", "1070.271"],
+    ["EXEMPT LOCAL", "X4", "89", "", "565.339"],
+    ["EXEMPT OTHER", "X4", "257", "", "241.295"],
+    [],
+    ["TOTAL EXEMPT PROPERTY - ALL COLUMNS", "", "472", "", "2955.514"],
+  ];
+
+  const PP_data = [
+    ["BOATS AND WATERCRAFT", "1", "1", "174200", "", "", "1", "174200"],
+    ["MACHINERY, TOOLS AND PATTERNS", "2", "", "", "", "", "0", "0"],
+    ["FURNITURE, FIXTURES AND EQUIPMENT", "3", "69", "1428700", "", "", "69", "1428700"],
+    ["ALL OTHER PERSONAL PROPERTY", "4A", "38", "374600", "", "", "38", "374600"],
+    ["IMPROVEMENTS ON LEASED LAND", "4B", "", "", "", "", "0", "0"],
+    ["MOBILE HOMES", "4C", "", "", "", "", "0", "0"],
+    [],
+    ["TOTAL PERSONAL PROPERTY - ALL COLUMNS", "", "108", "1977500", "0", "0", "108", "1977500"],
+  ];
+  const all_Data = {
+    TRE: TRE_data,
+    FC: FC_data,
+    EXEMPT: EXEMPT_data,
+    PP: PP_data,
+  };
+
+  const createTableRows = function (table_id, data) {
+    const table_body = $(`#${table_id} tbody`);
+
+    const table_data = data
+      .map((row) => {
+        const empty_row = ` <tr class="line_break" rowspan="1">
+                  <td class="table-borderless">
+                    &nbsp;
+                  </td>
+                </tr>`;
+        const data_row = `<tr>${row.map((item) => `<td>${item}</td>`).join("")}</tr>`;
+        return Array.isArray(row) && row.length > 0 ? data_row : empty_row;
+      })
+      .join("");
+
+    table_body.html(table_data);
+  };
+
+  //   const createTableRows = function (table_id, data) {
+  //     const table_body = $(`#${table_id} tbody`);
+
+  //     const table_data = data
+  //       .map((row) => `<tr>${row.length < 1 ? `<td class="no-border"></td>` : row.map((item) => `<td>${item}</td>`).join("")}`)
+  //       .join("");
+
+  //     table_body.html(table_data);
+  //   };
+
+  for (let [key, array] of Object.entries(all_Data)) {
+    createTableRows(key, array);
+  }
+
+  $(document).ready(function () {
+    $("#title_card_row").html(title_cards_html);
+
+    $(".table").each(function () {
+      $(this)
+        .children("thead")
+        .each(function () {
+          $(this).addClass("align-middle ws-no-wrap");
+        });
+      $(this).addClass("text-center table-sm text-small w-auto");
+    });
+    $(".table tr").each(function () {
+      const rowspan = parseInt($(this).attr("rowspan"));
+      rowspan > 1 && $(this).addClass("align-middle");
+      const is_thead_row = $(this).parent().is("thead");
+      if (is_thead_row) {
+        $(this).addClass("text-small ws-no-wrap");
+
+        $(this)
+          .children("td")
+          .each(function () {
+            // $(this).addClass("text-xsmall");
+            // const rowspan = parseInt($(this).attr("rowspan"));
+            // rowspan > 1 && $(this).addClass("align-middle");
+            $(this).text() == "" && $(this).addClass("table-secondary");
+          });
+      } else {
+        $(this)
+          .children("td")
+          .each(function () {
+            $(this).addClass("text-xsmall ws-no-wrap");
+            const rowspan = parseInt($(this).attr("rowspan"));
+            rowspan > 1 && $(this).addClass("align-middle");
+            $(this).text() == "" && $(this).addClass("table-secondary");
+          });
+      }
+    });
+
+    var element = $(".html-content").get(0);
+
+    $("#print_pdf").on("click", function () {
+      // CreatePDFfromHTML(testHeaders.report_title);
+      CreatePDFfromHTML("ART", 3);
+    });
+
+    $("#export_csv").on("click", function () {
+      exportToExcel(testHeaders.report_title);
+    });
+  });
+</script>
